@@ -324,14 +324,17 @@
 
   </div>
   <audio id="myAudio" loop>
-    <source src="Untitled.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
+      <source src="ssstik.io_1739294784630.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
   </audio>
+  
   <script>
-    window.onload = function() {
-      var audio = document.getElementById('myAudio');
-      audio.play();
-    };
+    document.addEventListener("click", function() {
+      var audio = document.getElementById("myAudio");
+      if (audio.paused) {
+        audio.play().catch(error => console.log("Không thể phát nhạc:", error));
+      }
+    });
   </script>
   
   <div class="bay">
