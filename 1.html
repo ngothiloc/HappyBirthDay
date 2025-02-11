@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bong Bóng Bay</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #87CEEB; /* Màu trời xanh */
+        }
+        .balloon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: floatUp 5s linear infinite;
+        }
+        .balloon img {
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function createBalloon() {
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+
+        // Thêm ảnh vào bong bóng
+        const img = document.createElement("img");
+        img.src = "fav.png"; // Thay bằng ảnh của bạn
+        balloon.appendChild(img);
+
+        // Định vị bong bóng ngẫu nhiên trên màn hình
+        balloon.style.left = Math.random() * window.innerWidth + "px";
+        balloon.style.animationDuration = (Math.random() * 3 + 3) + "s"; // Tốc độ bay khác nhau
+
+        document.body.appendChild(balloon);
+
+        // Xóa bong bóng sau khi bay lên
+        setTimeout(() => {
+            balloon.remove();
+        }, 5000);
+    }
+
+    // Tạo bong bóng liên tục
+    setInterval(createBalloon, 800);
+</script>
+
+</body>
+</html>
