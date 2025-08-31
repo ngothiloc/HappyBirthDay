@@ -113,7 +113,7 @@
       /* Container cố định giữa màn hình để không tạo scroll */
       .container {
         position: fixed;
-        top: 50%;
+        top: 60%;
         left: 50%;
         width: 400px;
         height: 300px;
@@ -411,6 +411,17 @@
       .music-btn:hover {
         background: #f44336;
       }
+
+      /* Canvas pháo hoa */
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 1000; /* Canvas nằm dưới nút nhưng trên nền */
+      }
     </style>
   </head>
   <body>
@@ -468,6 +479,8 @@
       <div class="balloon"></div>
     </div>
 
+    <canvas id="fireworks"></canvas>
+
     <script>
       document.addEventListener("click", function () {
         var audio = document.getElementById("myAudio");
@@ -493,6 +506,80 @@
           musicBtn.textContent = "⏸";
           musicBtn.style.background = "#f44336";
         }
+      });
+
+      //fireworks
+
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      class Firework {
+        constructor(x, y, color) {
+          this.x = x;
+          this.y = y;
+          this.color = color;
+          this.radius = Math.random() * 2 + 2; // hạt to hơn
+          this.alpha = 1;
+          this.speedY = -Math.random() * 4 - 2; // bay cao hơn
+          this.speedX = Math.random() * 3.5 - 2.5;
+          this.gravity = 0.03;
+          this.fade = 0.003 + Math.random() * 0.01; // chậm tàn
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.speedY += this.gravity;
+          this.alpha -= this.fade;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+          ctx.fill();
+        }
+      }
+
+      let fireworks = [];
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        fireworks.forEach((f, i) => {
+          f.update();
+          f.draw();
+          if (f.alpha <= 0) fireworks.splice(i, 1);
+        });
+        requestAnimationFrame(animate);
+      }
+
+      function launchFireworks() {
+        const colors = [
+          "150,0,0", // đỏ rượu
+          "0,100,0", // xanh lá đậm
+          "0,0,120", // xanh biển đậm
+          "180,150,0", // vàng tối
+          "200,80,0", // cam đỏ
+          "70,0,100", // tím than
+        ];
+
+        // bắn nhiều pháo cùng lúc (3 điểm bắn)
+        for (let j = 0; j < 1; j++) {
+          const x = Math.random() * canvas.width;
+          const y = canvas.height;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          for (let i = 0; i < 80; i++) {
+            fireworks.push(new Firework(x, y, color));
+          }
+        }
+      }
+
+      setInterval(launchFireworks, 1200);
+      animate();
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       });
     </script>
     <!--
