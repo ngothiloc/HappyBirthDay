@@ -1,74 +1,474 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bong Bóng Bay</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birth Day</title>
+    <link rel="icon" type="image/png" href="favi.png" />
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #87CEEB; /* Màu trời xanh */
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100dvh; /* viewport động cho iOS/Safari */
+        overflow: hidden; /* khóa kéo ngang + dọc */
+        background: hsl(70, 31%, 85%);
+      }
+
+      body {
+        user-select: none;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Tiêu đề cố định trên cùng, không chiếm chiều cao layout */
+      .typewriter {
+        position: fixed;
+        top: 42px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        z-index: 20;
+        max-width: 92vw;
+      }
+
+      .typewriter h1 {
+        color: #ee6f6f;
+        font-family: monospace;
+        overflow: hidden;
+        border-right: 0.15em solid orange;
+        white-space: nowrap;
+        font-size: 1.2rem; /* nhỏ vừa để không tràn */
+        letter-spacing: 0.15em;
+        margin: 0;
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
         }
-        .balloon {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            animation: floatUp 5s linear infinite;
+        to {
+          width: 100%;
         }
-        .balloon img {
-            width: 70%;
-            height: 70%;
-            border-radius: 50%;
+      }
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
         }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 0;
-            }
+        50% {
+          border-color: orange;
         }
+      }
+
+      /* Tiêu đề cố định trên cùng, không chiếm chiều cao layout */
+      .typewriter-1 {
+        position: fixed;
+        top: 72px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        z-index: 20;
+        max-width: 92vw;
+      }
+
+      .typewriter-1 h1 {
+        color: #ee6f6f;
+        font-family: monospace;
+        overflow: hidden;
+        border-right: 0.15em solid orange;
+        white-space: nowrap;
+        font-size: 1.2rem; /* nhỏ vừa để không tràn */
+        letter-spacing: 0.15em;
+        margin: 0;
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: orange;
+        }
+      }
+
+      /* Container cố định giữa màn hình để không tạo scroll */
+      .container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate(-50%, -50%) rotate(-3deg) scale(0.69);
+        transform-origin: center center;
+        z-index: 10;
+      }
+
+      /* Giữ nguyên phần phong bì của bạn */
+      .behind-envelope {
+        position: relative;
+        background-color: rgb(252, 221, 174);
+        height: 240px;
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .top-envelope {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 200px solid transparent;
+        border-right: 200px solid transparent;
+        border-bottom: 120px solid rgb(252, 221, 174);
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      .front-envelope {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 120px solid transparent;
+        border-left: 200px solid #cab09d;
+        border-right: 200px solid #cab09d;
+        border-bottom: 120px solid #cab09d;
+        bottom: -120px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      .bodder {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      .bodder div {
+        position: absolute;
+        background-color: rgb(128, 60, 4);
+        border-radius: 10px;
+      }
+
+      .bodder-1,
+      .bodder-2 {
+        width: 460px;
+        height: 5px;
+      }
+      .bodder-1 {
+        transform: rotate(30.9deg);
+      }
+      .bodder-2 {
+        transform: rotate(-30.9deg);
+      }
+      .bodder-3 {
+        width: 400px;
+        height: 5px;
+        top: 0%;
+      }
+      .bodder-4 {
+        width: 400px;
+        height: 5px;
+        bottom: 10%;
+      }
+      .bodder-5 {
+        width: 5px;
+        height: 240px;
+        left: 99%;
+      }
+      .bodder-6 {
+        width: 5px;
+        height: 240px;
+        left: 0%;
+      }
+      .bodder-7 {
+        width: 235px;
+        height: 5px;
+        top: -25%;
+        left: 45.6%;
+        transform: rotate(30.9deg);
+      }
+      .bodder-8 {
+        width: 234px;
+        height: 5px;
+        top: -25%;
+        left: -4%;
+        transform: rotate(-30.9deg);
+      }
+
+      .letter {
+        position: absolute;
+        width: 300px;
+        background: #f3e7e4;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: 5px solid rgb(128, 60, 4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #333;
+        cursor: grab;
+        transition: top 0.3s ease;
+        left: 50%;
+        top: 35%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .letter p {
+        margin: 5px 0;
+      }
+      .letter .highlight,
+      .letter .emoji {
+        font-weight: bold;
+        color: #fc4c3f;
+      }
+      .letter:hover {
+        top: calc(5% - 90px);
+      }
+
+      /* Balloons: thu nhỏ + cố định dưới để không tạo scroll */
+      .bay {
+        position: fixed;
+        bottom: 6%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8); /* ↓ thu nhỏ cả cụm balloon */
+        transform-origin: bottom center;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        z-index: 5;
+        pointer-events: none; /* không cản click phát nhạc */
+      }
+
+      .balloon {
+        display: inline-block;
+        width: 80px; /* bạn đã giảm — giữ nguyên */
+        height: 95px;
+        background: hsl(215, 50%, 65%);
+        border-radius: 80%;
+        position: relative;
+        box-shadow: inset -10px -10px 0 rgba(0, 0, 0, 0.07);
+        margin: 10px 16px; /* giảm margin để gọn hơn */
+        transition: transform 0.5s ease;
+        animation: balloons 4s ease-in-out infinite;
+        transform-origin: bottom center;
+      }
+
+      @keyframes balloons {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-4deg);
+        }
+        50% {
+          transform: translateY(-25px) rotate(4deg);
+        }
+      }
+
+      .balloon:before {
+        content: "▲";
+        font-size: 16px; /* nhỏ lại cho cân đối */
+        color: hsl(215, 30%, 50%);
+        display: block;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: -12px;
+        z-index: -100;
+      }
+
+      .balloon:after {
+        display: inline-block;
+        top: 93px;
+        position: absolute;
+        height: 90px;
+        width: 1px;
+        margin: 0 auto;
+        content: "";
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .balloon:nth-child(2) {
+        background: hsl(245, 40%, 65%);
+        animation-duration: 3.5s;
+      }
+      .balloon:nth-child(2):before {
+        color: hsl(245, 40%, 65%);
+      }
+
+      .balloon:nth-child(3) {
+        background: hsl(139, 50%, 60%);
+        animation-duration: 3s;
+      }
+      .balloon:nth-child(3):before {
+        color: hsl(139, 30%, 50%);
+      }
+
+      .balloon:nth-child(4) {
+        background: hsl(59, 50%, 58%);
+        animation-duration: 4.5s;
+      }
+      .balloon:nth-child(4):before {
+        color: hsl(59, 30%, 52%);
+      }
+
+      .balloon:nth-child(5) {
+        background: hsl(23, 55%, 57%);
+        animation-duration: 5s;
+      }
+      .balloon:nth-child(5):before {
+        color: hsl(23, 44%, 46%);
+      }
+
+      .balloon:nth-child(6) {
+        background: hsl(0, 55%, 57%);
+        animation-duration: 5s;
+      }
+      .balloon:nth-child(6):before {
+        color: hsl(4, 44%, 46%);
+      }
+
+      /* Bong bóng ảnh nổi (bạn đang tắt) — giữ nguyên */
+      .floating-bubble {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        animation: floatUp 5s linear infinite;
+      }
+      .floating-bubble img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) scale(0.5);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1);
+          opacity: 0;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="typewriter">
+      <h1>Thư chúc mừng</h1>
+    </div>
+    <div class="typewriter-1">
+      <h1>bạn iu nhập học</h1>
+    </div>
 
-<script>
-    function createBalloon() {
-        const balloon = document.createElement("div");
-        balloon.classList.add("balloon");
+    <div class="container">
+      <div class="behind-envelope">
+        <div class="top-envelope"></div>
+        <div class="bodder">
+          <div class="bodder-3"></div>
+          <div class="bodder-7"></div>
+          <div class="bodder-8"></div>
+        </div>
+        <div class="letter">
+          <p class="emoji">Chúc mừng bạn iuuu 💗</p>
+          <p>
+            Hôm nay là ngày đặc biệt (1.9.25), ngày mà bạn bước vào một chương
+            mới của cuộc đời. Chúc mừng bạn đã thực hiện được ước mơ của mình.
+            Chúc bạn có một năm học thật thành công. Yêu bạn nhiều 💖
+          </p>
+        </div>
+        <div class="front-envelope"></div>
+      </div>
+      <div class="bodder">
+        <div class="bodder-1"></div>
+        <div class="bodder-2"></div>
+        <div class="bodder-4"></div>
+        <div class="bodder-5"></div>
+        <div class="bodder-6"></div>
+      </div>
+      <img
+        style="height: 60px; position: absolute"
+        src="pngegg.png"
+        alt="Mô tả hình ảnh"
+      />
+    </div>
 
-        // Thêm ảnh vào bong bóng
+    <audio id="myAudio" loop>
+      <source src="ssstik.io_1739294784630.mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <script>
+      document.addEventListener("click", function () {
+        var audio = document.getElementById("myAudio");
+        if (audio.paused) {
+          audio
+            .play()
+            .catch((error) => console.log("Không thể phát nhạc:", error));
+        }
+      });
+    </script>
+
+    <div class="bay">
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+      <div class="balloon"></div>
+    </div>
+
+    <!--
+    <script>
+      function createBubble() {
+        const bubble = document.createElement("div");
+        bubble.classList.add("floating-bubble");
         const img = document.createElement("img");
-        img.src = "fav.png"; // Thay bằng ảnh của bạn
-        balloon.appendChild(img);
-
-        // Định vị bong bóng ngẫu nhiên trên màn hình
-        balloon.style.left = Math.random() * window.innerWidth + "px";
-        balloon.style.animationDuration = (Math.random() * 3 + 3) + "s"; // Tốc độ bay khác nhau
-
-        document.body.appendChild(balloon);
-
-        // Xóa bong bóng sau khi bay lên
-        setTimeout(() => {
-            balloon.remove();
-        }, 5000);
-    }
-
-    // Tạo bong bóng liên tục
-    setInterval(createBalloon, 800);
-</script>
-
-</body>
+        img.src = "fav.png";
+        bubble.appendChild(img);
+        bubble.style.left = Math.random() * window.innerWidth + "px";
+        bubble.style.animationDuration = Math.random() * 3 + 3 + "s";
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 5000);
+      }
+      setInterval(createBubble, 800);
+    </script>
+    -->
+  </body>
 </html>
